@@ -1,0 +1,57 @@
+gain criteria: IG, max depth: 1, train accuracy: 0.6987
+gain criteria: IG, max depth: 1, test accuracy: 0.7029
+
+gain criteria: IG, max depth: 2, train accuracy: 0.7778
+gain criteria: IG, max depth: 2, test accuracy: 0.7772
+
+gain criteria: IG, max depth: 3, train accuracy: 0.8188
+gain criteria: IG, max depth: 3, test accuracy: 0.8033
+
+gain criteria: IG, max depth: 4, train accuracy: 0.9179
+gain criteria: IG, max depth: 4, test accuracy: 0.8487
+
+gain criteria: IG, max depth: 5, train accuracy: 0.973
+gain criteria: IG, max depth: 5, test accuracy: 0.9161
+
+gain criteria: IG, max depth: 6, train accuracy: 1.0
+gain criteria: IG, max depth: 6, test accuracy: 0.9161
+
+
+gain criteria: GI, max depth: 1, train accuracy: 0.6987
+gain criteria: GI, max depth: 1, test accuracy: 0.7029
+
+gain criteria: GI, max depth: 2, train accuracy: 0.7778
+gain criteria: GI, max depth: 2, test accuracy: 0.7772
+
+gain criteria: GI, max depth: 3, train accuracy: 0.8238
+gain criteria: GI, max depth: 3, test accuracy: 0.8157
+
+gain criteria: GI, max depth: 4, train accuracy: 0.9109
+gain criteria: GI, max depth: 4, test accuracy: 0.8624
+
+gain criteria: GI, max depth: 5, train accuracy: 0.973
+gain criteria: GI, max depth: 5, test accuracy: 0.9161
+
+gain criteria: GI, max depth: 6, train accuracy: 1.0
+gain criteria: GI, max depth: 6, test accuracy: 0.9161
+
+
+gain criteria: ME, max depth: 1, train accuracy: 0.6987
+gain criteria: ME, max depth: 1, test accuracy: 0.7029
+
+gain criteria: ME, max depth: 2, train accuracy: 0.7077
+gain criteria: ME, max depth: 2, test accuracy: 0.6864
+
+gain criteria: ME, max depth: 3, train accuracy: 0.8198
+gain criteria: ME, max depth: 3, test accuracy: 0.8074
+
+gain criteria: ME, max depth: 4, train accuracy: 0.9139
+gain criteria: ME, max depth: 4, test accuracy: 0.8487
+
+gain criteria: ME, max depth: 5, train accuracy: 0.971
+gain criteria: ME, max depth: 5, test accuracy: 0.9051
+
+gain criteria: ME, max depth: 6, train accuracy: 1.0
+gain criteria: ME, max depth: 6, test accuracy: 0.9051
+
+

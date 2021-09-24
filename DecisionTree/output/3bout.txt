@@ -1,0 +1,147 @@
+gain criteria: IG, max depth: 1, train accuracy: 0.8808
+gain criteria: IG, max depth: 1, test accuracy: 0.8752
+
+gain criteria: IG, max depth: 2, train accuracy: 0.8808
+gain criteria: IG, max depth: 2, test accuracy: 0.8752
+
+gain criteria: IG, max depth: 3, train accuracy: 0.8808
+gain criteria: IG, max depth: 3, test accuracy: 0.8752
+
+gain criteria: IG, max depth: 4, train accuracy: 0.8826
+gain criteria: IG, max depth: 4, test accuracy: 0.8754
+
+gain criteria: IG, max depth: 5, train accuracy: 0.883
+gain criteria: IG, max depth: 5, test accuracy: 0.8756
+
+gain criteria: IG, max depth: 6, train accuracy: 0.908
+gain criteria: IG, max depth: 6, test accuracy: 0.885
+
+gain criteria: IG, max depth: 7, train accuracy: 0.9316
+gain criteria: IG, max depth: 7, test accuracy: 0.8776
+
+gain criteria: IG, max depth: 8, train accuracy: 0.9526
+gain criteria: IG, max depth: 8, test accuracy: 0.8648
+
+gain criteria: IG, max depth: 9, train accuracy: 0.9708
+gain criteria: IG, max depth: 9, test accuracy: 0.858
+
+gain criteria: IG, max depth: 10, train accuracy: 0.9792
+gain criteria: IG, max depth: 10, test accuracy: 0.8532
+
+gain criteria: IG, max depth: 11, train accuracy: 0.9814
+gain criteria: IG, max depth: 11, test accuracy: 0.8528
+
+gain criteria: IG, max depth: 12, train accuracy: 0.982
+gain criteria: IG, max depth: 12, test accuracy: 0.8526
+
+gain criteria: IG, max depth: 13, train accuracy: 0.982
+gain criteria: IG, max depth: 13, test accuracy: 0.8526
+
+gain criteria: IG, max depth: 14, train accuracy: 0.982
+gain criteria: IG, max depth: 14, test accuracy: 0.8526
+
+gain criteria: IG, max depth: 15, train accuracy: 0.982
+gain criteria: IG, max depth: 15, test accuracy: 0.8526
+
+gain criteria: IG, max depth: 16, train accuracy: 0.982
+gain criteria: IG, max depth: 16, test accuracy: 0.8526
+
+
+gain criteria: GI, max depth: 1, train accuracy: 0.8808
+gain criteria: GI, max depth: 1, test accuracy: 0.8752
+
+gain criteria: GI, max depth: 2, train accuracy: 0.8808
+gain criteria: GI, max depth: 2, test accuracy: 0.8752
+
+gain criteria: GI, max depth: 3, train accuracy: 0.8808
+gain criteria: GI, max depth: 3, test accuracy: 0.8752
+
+gain criteria: GI, max depth: 4, train accuracy: 0.8922
+gain criteria: GI, max depth: 4, test accuracy: 0.884
+
+gain criteria: GI, max depth: 5, train accuracy: 0.8962
+gain criteria: GI, max depth: 5, test accuracy: 0.887
+
+gain criteria: GI, max depth: 6, train accuracy: 0.9096
+gain criteria: GI, max depth: 6, test accuracy: 0.887
+
+gain criteria: GI, max depth: 7, train accuracy: 0.931
+gain criteria: GI, max depth: 7, test accuracy: 0.8786
+
+gain criteria: GI, max depth: 8, train accuracy: 0.9544
+gain criteria: GI, max depth: 8, test accuracy: 0.8664
+
+gain criteria: GI, max depth: 9, train accuracy: 0.9712
+gain criteria: GI, max depth: 9, test accuracy: 0.8604
+
+gain criteria: GI, max depth: 10, train accuracy: 0.9796
+gain criteria: GI, max depth: 10, test accuracy: 0.8546
+
+gain criteria: GI, max depth: 11, train accuracy: 0.9814
+gain criteria: GI, max depth: 11, test accuracy: 0.8546
+
+gain criteria: GI, max depth: 12, train accuracy: 0.982
+gain criteria: GI, max depth: 12, test accuracy: 0.8544
+
+gain criteria: GI, max depth: 13, train accuracy: 0.982
+gain criteria: GI, max depth: 13, test accuracy: 0.8544
+
+gain criteria: GI, max depth: 14, train accuracy: 0.982
+gain criteria: GI, max depth: 14, test accuracy: 0.8544
+
+gain criteria: GI, max depth: 15, train accuracy: 0.982
+gain criteria: GI, max depth: 15, test accuracy: 0.8544
+
+gain criteria: GI, max depth: 16, train accuracy: 0.982
+gain criteria: GI, max depth: 16, test accuracy: 0.8544
+
+
+gain criteria: ME, max depth: 1, train accuracy: 0.8808
+gain criteria: ME, max depth: 1, test accuracy: 0.8752
+
+gain criteria: ME, max depth: 2, train accuracy: 0.8808
+gain criteria: ME, max depth: 2, test accuracy: 0.8752
+
+gain criteria: ME, max depth: 3, train accuracy: 0.8808
+gain criteria: ME, max depth: 3, test accuracy: 0.8752
+
+gain criteria: ME, max depth: 4, train accuracy: 0.894
+gain criteria: ME, max depth: 4, test accuracy: 0.8886
+
+gain criteria: ME, max depth: 5, train accuracy: 0.8988
+gain criteria: ME, max depth: 5, test accuracy: 0.8876
+
+gain criteria: ME, max depth: 6, train accuracy: 0.912
+gain criteria: ME, max depth: 6, test accuracy: 0.8892
+
+gain criteria: ME, max depth: 7, train accuracy: 0.9342
+gain criteria: ME, max depth: 7, test accuracy: 0.8814
+
+gain criteria: ME, max depth: 8, train accuracy: 0.955
+gain criteria: ME, max depth: 8, test accuracy: 0.871
+
+gain criteria: ME, max depth: 9, train accuracy: 0.9696
+gain criteria: ME, max depth: 9, test accuracy: 0.8656
+
+gain criteria: ME, max depth: 10, train accuracy: 0.9756
+gain criteria: ME, max depth: 10, test accuracy: 0.8624
+
+gain criteria: ME, max depth: 11, train accuracy: 0.9784
+gain criteria: ME, max depth: 11, test accuracy: 0.8618
+
+gain criteria: ME, max depth: 12, train accuracy: 0.9808
+gain criteria: ME, max depth: 12, test accuracy: 0.8614
+
+gain criteria: ME, max depth: 13, train accuracy: 0.9818
+gain criteria: ME, max depth: 13, test accuracy: 0.861
+
+gain criteria: ME, max depth: 14, train accuracy: 0.982
+gain criteria: ME, max depth: 14, test accuracy: 0.8608
+
+gain criteria: ME, max depth: 15, train accuracy: 0.982
+gain criteria: ME, max depth: 15, test accuracy: 0.8608
+
+gain criteria: ME, max depth: 16, train accuracy: 0.982
+gain criteria: ME, max depth: 16, test accuracy: 0.8608
+
+
