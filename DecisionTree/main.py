@@ -121,9 +121,9 @@ def create_bank_table(replace_unknown):
 
 
                 
-print("Car dataset Output:\n\n")
-create_car_table()
-print("Bank dataset without replacement Output:\n\n")
+# print("Car dataset Output:\n\n")
+# create_car_table()
+# print("Bank dataset without replacement Output:\n\n")
 create_bank_table(False)
-print("Bank dataset with replacement Output:\n\n")
-create_bank_table(True)
+# print("Bank dataset with replacement Output:\n\n")
+# create_bank_table(True)
