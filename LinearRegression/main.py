@@ -1,6 +1,4 @@
-from typing import final
 import matplotlib.pyplot as plt
-from numpy.core.fromnumeric import shape
 import pandas as pd
 import numpy as np
 
@@ -106,9 +104,6 @@ def linear_regression_concrete_stochastic():
 
 
 
-#final_weights = linear_regression_concrete_batch()
-
-#final_weights = linear_regression_concrete_stochastic()
-# final_weights = compute_analytic_linear_regression()
-# print(final_weights)
+print(linear_regression_concrete_batch())
+print(linear_regression_concrete_stochastic())
 
