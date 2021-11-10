@@ -58,6 +58,7 @@ def linear_regression_concrete_batch():
     ax2.plot(range(i), test_costs, label='Test Costs', c='orange')
     plt.ylabel('Test Cost')
     fig.legend(loc='upper left')
+    plt.savefig('batch.png')
     plt.show()    
     return weights
     
@@ -99,7 +100,8 @@ def linear_regression_concrete_stochastic():
     ax2.plot(range(num_iter), test_costs, label='Test Costs', c='orange')
     plt.ylabel('Test Cost')
     fig.legend(loc='upper left')
-    plt.show()
+    plt.savefig('stochastic.png')
+    plt.show()    
     return weights
 
 
