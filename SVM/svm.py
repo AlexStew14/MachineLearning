@@ -66,7 +66,7 @@ def primal_stochastic_svm(train_x, train_y, test_x, test_y, C=100/873, lr_0=.001
         lr_schedule = lambda t,alpha: lr_0 / (1 + t)
 
     convergence_series = []
-    for epoch in range(max_epochs):
+    for epoch in range(1, max_epochs+1):
         lr = lr_schedule(epoch, a)
         rand_indices = np.random.choice(train_x.shape[0], train_x.shape[0],replace=True)
         batch_x = train_x.iloc[rand_indices]
@@ -108,8 +108,8 @@ def get_minimized_alphas(train_x, C, x, y, dual_svm_objective, dual_svm_jac):
     result = minimize(dual_svm_objective, a_0, constraints=constraints, method='SLSQP', bounds=bounds, jac=dual_svm_jac)
 
     minimized_a = result.x
-    minimized_a[np.isclose(minimized_a, 0)] = 0
-    minimized_a[np.isclose(minimized_a, C)] = C
+    minimized_a[np.isclose(minimized_a, 0, atol=.001)] = 0
+    minimized_a[np.isclose(minimized_a, C, atol=.001)] = C
     return minimized_a
 
 
@@ -153,7 +153,7 @@ def dual_svm(train_x, train_y, test_x, test_y, C=500/873, gamma=-1):
     test_error = 1 - np.mean(test_preds == test_y.values)
     train_error = 1 - np.mean(train_preds == train_y.values)
 
-    return weights, bias, train_error, test_error
+    return weights, bias, train_error, test_error, minimized_a
 
 
 
@@ -161,27 +161,58 @@ if __name__ == '__main__':
     train_x, train_y, test_x, test_y = read_bank_data()
     
     print("Primal SVM with stochastic sub-gradient descent with alpha learning-rate schedule:")
+    results = []
+
     for C in np.array([100/873, 500/873, 700/873]):
         weights, train_error, test_error = primal_stochastic_svm(train_x, train_y, test_x, test_y, C, a=.0001)
         print(f"C: {C.round(3)}, Weights: {weights.round(3)}, train_error: {train_error.round(3)}, test_error: {test_error.round(3)}")
+        results.append([C.round(3), train_error.round(3), test_error.round(3), weights.round(3)])
+
+    df = pd.DataFrame(results, columns=['C', 'Train Error', 'Test Error', 'Weights'])
+    df.to_latex('alpha_learning_rate_latex', index=False)
 
     print("\nPrimal SVM with stochastic sub-gradient descent without alpha learning-rate schedule:")
+    results = []
+
     for C in np.array([100/873, 500/873, 700/873]):
         weights, train_error, test_error = primal_stochastic_svm(train_x, train_y, test_x, test_y, C, a=-1)
         print(f"C: {C.round(3)}, Weights: {weights.round(3)}, train_error: {train_error.round(3)}, test_error: {test_error.round(3)}")
+        results.append([C.round(3), train_error.round(3), test_error.round(3), weights.round(3)])
 
+    df = pd.DataFrame(results, columns=['C', 'Train Error', 'Test Error', 'Weights'])
+    df.to_latex('no_alpha_learning_rate_latex', index=False)
+
+    results = []
     print("\nDual SVM Linear Kernel")    
     for C in np.array([100/873, 500/873, 700/873]):
-        weights, bias, train_error, test_error = dual_svm(train_x.drop(columns=['bias']), train_y, test_x.drop(columns=['bias']), test_y, C)
+        weights, bias, train_error, test_error, _ = dual_svm(train_x.drop(columns=['bias']), train_y, test_x.drop(columns=['bias']), test_y, C)
         print(f"C: {C.round(3)}, bias: {bias.round(3)}, Weights: {weights.round(3)}, train_error: {train_error.round(3)}, test_error: {test_error.round(3)}")
+        results.append([C.round(3), train_error.round(3), test_error.round(3), weights.round(3), bias.round(3)])
 
+    df = pd.DataFrame(results, columns=['C', 'Train Error', 'Test Error', 'Weights', 'bias'])
+    df.to_latex('dual_linear_kernel_latex', index=False)
+
+    results = []
+    support_results = []      
     print("\nDual SVM Gaussian Kernel")    
     for C in np.array([100/873, 500/873, 700/873]):
+        prev_minimized_alphas = None
+        num_overlap_support = None
         for gamma in np.array([.1, .5, 1, 5, 100]):
-            weights, bias, train_error, test_error = dual_svm(train_x.drop(columns=['bias']), train_y, test_x.drop(columns=['bias']), test_y, C, gamma)
-            print(f"C: {C.round(3)}, gamma: {gamma}, bias: {bias.round(3)}, Weights: {weights.round(3)}, train_error: {train_error.round(3)}, test_error: {test_error.round(3)}")
-    
-    # weights, bias, train_error, test_error = dual_svm(train_x.drop(
-    #     columns=['bias']), train_y, test_x.drop(columns=['bias']), test_y, gamma=.5)
+            weights, bias, train_error, test_error, minimized_alphas = dual_svm(train_x.drop(columns=['bias']), train_y, test_x.drop(columns=['bias']), test_y, C, gamma)
+            num_support_vector = np.count_nonzero(minimized_alphas)
+            print(f"C: {C.round(3)}, gamma: {gamma}, bias: {bias.round(3)}, Weights: {weights.round(3)}, train_error: {train_error.round(3)}, test_error: {test_error.round(3)}, Support Vector Count: {num_support_vector}")
+            results.append([C.round(3), gamma, train_error.round(3), test_error.round(3)])
+            if prev_minimized_alphas is not None:
+                support_vectors = np.nonzero(minimized_alphas)[0]
+                prev_support_vectors = np.nonzero(prev_minimized_alphas)[0]
+                num_overlap_support = np.intersect1d(support_vectors, prev_support_vectors, assume_unique=True).shape[0]
+                print(f"C: {C.round(3)}, gamma: {gamma}, Overlapping Support Vector Count: {num_overlap_support}")
+            
+            support_results.append([C.round(3), gamma, num_support_vector, num_overlap_support])
+            prev_minimized_alphas = minimized_alphas
 
-    # print(f"bias: {bias}, weights: {weights.round(3)} train_error: {train_error.round(3)}, test_error: {test_error.round(3)}")
+    df = pd.DataFrame(results, columns=['C', 'Gamma', 'Train Error', 'Test Error'])
+    df.to_latex('dual_gaussian_kernel_latex', index=False)
+    df = pd.DataFrame(support_results, columns=['C', 'Gamma', 'Number of Support Vectors', 'Number of Overlapping Support Vectors'])
+    df.to_latex('dual_gaussian_support_vectors_latex', index=False)
