@@ -19,7 +19,7 @@ def read_bank_data():
 
 class NeuralNet(nn.Module):
     
-    def __init__(self, layer_dimensions, num_epochs=1000, ReLU=True):
+    def __init__(self, input_size, width, depth, num_epochs=1000, ReLU=True):
         super(NeuralNet, self).__init__()      
         self.num_epochs = num_epochs          
 
@@ -29,13 +29,14 @@ class NeuralNet(nn.Module):
                 self.weights_init(model.weight)
                 torch.nn.init.ones_(model.bias)
                         
-        self.model = nn.Sequential(                       
-            nn.Linear(layer_dimensions[0], layer_dimensions[1]),
-            nn.Tanh() if not ReLU else nn.ReLU(),
-            nn.Linear(layer_dimensions[1], layer_dimensions[2]),
-            nn.Tanh() if not ReLU else nn.ReLU(),
-            nn.Linear(layer_dimensions[2], layer_dimensions[3])        
-        )
+        module_list = [nn.Linear(input_size, width), nn.Tanh() if not ReLU else nn.ReLU()]
+        for i in range(depth-1):
+            module_list.append(nn.Linear(width, width))
+            module_list.append(nn.Tanh() if not ReLU else nn.ReLU())
+
+        module_list.append(nn.Linear(width, output_size))
+
+        self.model = nn.Sequential(*module_list)
 
         self.model.apply(init_weights)
 
@@ -70,47 +71,50 @@ if __name__=='__main__':
 
     print("\nNeural Network pytorch ReLU results:\n")
     widths = [5, 10, 25, 50, 100]
+    depths = [3, 5, 9]
     output = []
-    for width in widths:
-        model = NeuralNet([input_size, width, width, output_size], ReLU=True)
-        
-        model.train(train_X.reshape((-1, input_size)), train_y)
-        predictions = model.forward(train_X).detach().numpy()
-        predictions[predictions >= 0] = 1
-        predictions[predictions < 0] = -1
+    for depth in depths:
+        for width in widths:
+            model = NeuralNet(input_size, width, depth, ReLU=True)        
+            
+            model.train(train_X.reshape((-1, input_size)), train_y)
+            predictions = model.forward(train_X).detach().numpy()
+            predictions[predictions >= 0] = 1
+            predictions[predictions < 0] = -1
 
-        train_error = 1 - np.mean(predictions == train_y)
+            train_error = 1 - np.mean(predictions == train_y)
 
-        predictions = model.forward(test_x).detach().numpy()
-        predictions[predictions >= 0] = 1
-        predictions[predictions < 0] = -1
+            predictions = model.forward(test_x).detach().numpy()
+            predictions[predictions >= 0] = 1
+            predictions[predictions < 0] = -1
 
-        test_error = 1 - np.mean(predictions == test_y)
-        output.append([width, train_error.round(3), test_error.round(3)])
-        print(f"width: {width}, train error: {train_error.round(3)}, test error: {test_error.round(3)}")
+            test_error = 1 - np.mean(predictions == test_y)
+            output.append([width, depth, train_error.round(3), test_error.round(3)])
+            print(f"width: {width}, depth:{depth}, train error: {train_error.round(3)}, test error: {test_error.round(3)}")
 
-    output_df = pd.DataFrame(output, columns=['Width', 'Train Error', 'Test Error'])
-    output_df.to_latex('latex_pytorch_ReLU_output.txt', index=False)
+        output_df = pd.DataFrame(output, columns=['Width', 'Depth', 'Train Error', 'Test Error'])
+        output_df.to_latex('latex_pytorch_ReLU_output.txt', index=False)
 
     print("\nNeural Network pytorch tanh results:\n")
     output = []
-    for width in widths:
-        model = NeuralNet([input_size, width, width, output_size], ReLU=False)
-        
-        model.train(train_X.reshape((-1, input_size)), train_y)
-        predictions = model.forward(train_X).detach().numpy()
-        predictions[predictions >= 0] = 1
-        predictions[predictions < 0] = -1
+    for depth in depths:
+        for width in widths:
+            model = NeuralNet(input_size, width, depth, ReLU=False)
+            
+            model.train(train_X.reshape((-1, input_size)), train_y)
+            predictions = model.forward(train_X).detach().numpy()
+            predictions[predictions >= 0] = 1
+            predictions[predictions < 0] = -1
 
-        train_error = 1 - np.mean(predictions == train_y)
+            train_error = 1 - np.mean(predictions == train_y)
 
-        predictions = model.forward(test_x).detach().numpy()
-        predictions[predictions >= 0] = 1
-        predictions[predictions < 0] = -1
+            predictions = model.forward(test_x).detach().numpy()
+            predictions[predictions >= 0] = 1
+            predictions[predictions < 0] = -1
 
-        test_error = 1 - np.mean(predictions == test_y)
-        output.append([width, train_error.round(3), test_error.round(3)])
-        print(f"width: {width}, train error: {train_error.round(3)}, test error: {test_error.round(3)}")
+            test_error = 1 - np.mean(predictions == test_y)
+            output.append([width, depth, train_error.round(3), test_error.round(3)])
+            print(f"width: {width}, depth:{depth}, train error: {train_error.round(3)}, test error: {test_error.round(3)}")
 
-    output_df = pd.DataFrame(output, columns=['Width', 'Train Error', 'Test Error'])
-    output_df.to_latex('latex_pytorch_tanh_output.txt', index=False)
+            output_df = pd.DataFrame(output, columns=['Width', 'Depth', 'Train Error', 'Test Error'])
+        output_df.to_latex('latex_pytorch_tanh_output.txt', index=False)
