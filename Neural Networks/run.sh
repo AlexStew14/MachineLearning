@@ -1,0 +1,2 @@
+python3 neural_network.py
+python3 neural_network_pytorch.py

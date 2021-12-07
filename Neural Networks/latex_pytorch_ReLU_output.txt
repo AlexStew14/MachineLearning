@@ -1,0 +1,11 @@
+\begin{tabular}{rrr}
+\toprule
+ Width &  Train Error &  Test Error \\
+\midrule
+     5 &        0.071 &       0.084 \\
+    10 &        0.001 &       0.002 \\
+    25 &        0.000 &       0.000 \\
+    50 &        0.000 &       0.000 \\
+   100 &        0.000 &       0.000 \\
+\bottomrule
+\end{tabular}
